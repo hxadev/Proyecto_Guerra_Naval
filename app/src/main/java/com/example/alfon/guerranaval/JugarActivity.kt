@@ -23,8 +23,8 @@ class JugarActivity : AppCompatActivity() {
     var barcosEnemigos=0
     var aciertosMaquina=0
 
-    public lateinit var ImagenesEnemigo:IntArray
-    public lateinit var ImagenesMio:IntArray
+    lateinit var ImagenesEnemigo:IntArray
+    lateinit var ImagenesMio:IntArray
 
     lateinit var tableroMio:ArrayList<Button>
     private lateinit var tableroEnemigo:ArrayList<Button>
@@ -144,7 +144,7 @@ class JugarActivity : AppCompatActivity() {
     }
 
 
-    public fun posicionarBarcosEnemigos(tableroE:ArrayList<Button>){
+    fun posicionarBarcosEnemigos(tableroE:ArrayList<Button>){
         for(i:Int in 0 until tableroE.size){
             tableroE[((Math.random()*i+1).toInt())].setText(BARCO_POSICIONADO)
             tableroE[i].textSize=0F
@@ -163,15 +163,15 @@ class JugarActivity : AppCompatActivity() {
     }
 
 
-    public fun finalizarJuego(){
+    fun finalizarJuego(){
         for(i:Int in 0 until tableroEnemigo.size){
-            tableroEnemigo[i].isEnabled=false;
-            tableroMio[i].isEnabled=false;
+            tableroEnemigo[i].isEnabled=false
+            tableroMio[i].isEnabled=false
 
         }
     }
 
-    public fun posicionarBarcosMios(tableroM:ArrayList<Button>){
+    fun posicionarBarcosMios(tableroM:ArrayList<Button>){
         for(i:Int in 0 until tableroM.size){
             tableroM[i].setBackgroundResource(R.drawable.mar5050dp)
         }
@@ -192,10 +192,10 @@ class JugarActivity : AppCompatActivity() {
 
 
 
-    public fun ataqueEnemigo() {
+    fun ataqueEnemigo() {
         val tamTabM = tableroMio.size
         var posicionTirar = Math.random() * tamTabM
-        var aux: Int = 0
+        //var aux: Int = 0
 
         //tableroMio[(Math.random()*tamTabM).toInt()].setBackgroundColor(Color.RED)
 
@@ -264,13 +264,13 @@ class JugarActivity : AppCompatActivity() {
     }
 
 
-    public fun jugar()
+     fun jugar()
     {
         mp=MediaPlayer.create(this,R.raw.clickboton)
         vibratorServ=this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        var turnoMaquina:Boolean=false
-        var aciertosJugador=0;
-        var fallosJugador=0;
+        //var turnoMaquina:Boolean=false
+        var aciertosJugador=0
+        var fallosJugador=0
 
 
         for (i:Int in 0 until tableroEnemigo.size){
@@ -289,8 +289,9 @@ class JugarActivity : AppCompatActivity() {
                     mp.start()
                     ataqueEnemigo()
                 }else{
+                    fallosJugador++
                     tableroEnemigo[i].setText(TIRO_FALLIDO)
-                    textFallos.text=(fallosJugador++).toString()
+                    textFallos.text=(fallosJugador).toString()
                     //tableroEnemigo[i].setBackgroundColor(Color.YELLOW)
                     tableroEnemigo[i].setBackgroundResource(R.drawable.exposion5050dp)
                     vibratorServ.vibrate(80)
